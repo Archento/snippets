@@ -11,7 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 def normalize(value1, value2):
-    """Remove whitespace and format values if necessary
+    """
+    Remove whitespace and format values if necessary
 
     Args:
         value1 (String): any
@@ -28,7 +29,8 @@ def normalize(value1, value2):
 
 
 def read_csv(filename):
-    """CSV traversal function.
+    """
+    CSV traversal function.
     Iterate over every row and handle data based on column
 
     Args:
@@ -37,7 +39,7 @@ def read_csv(filename):
     Yields:
         tuple: found entries in csv file
     """
-    with open(filename) as csv_file:
+    with open(filename, encoding="utf-8") as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=";")
         firstline = True
         for idx, row in enumerate(csv_reader):
@@ -45,7 +47,7 @@ def read_csv(filename):
                 if firstline:
                     firstline = False
                     continue
-                if not row[2] or not row[4]: # change columns
+                if not row[2] or not row[4]:  # change columns
                     logger.error(f"Row has empty cells: {row}")
                     continue
                 yield row[2], row[4]
@@ -55,7 +57,8 @@ def read_csv(filename):
 
 
 def do_stuff(value1: str, value2: str):
-    """Do Stuff here with the value(s) from the CSV file
+    """
+    Do Stuff here with the value(s) from the CSV file
 
     Args:
         value1 (str): any
@@ -66,20 +69,16 @@ def do_stuff(value1: str, value2: str):
     """
     value1, value2 = normalize(value1, value2)
     logger.info(f"Trying to do stuff with {value1} and {value2}")
-    return True # call API here if needed
+    return True  # call API here if needed
 
 
-def main():
+if __name__ == "__main__":
     logger.info("Start progress")
     for p1, p2 in read_csv(INPUTCSV):
         try:
             if not do_stuff(p1, p2):
                 logger.error(f"Failed to do stuff for params: {p1} and {p2}")
             else:
-                logger.info(f"Successfully did stuff")
+                logger.info("Successfully did stuff")
         except Exception:
             logger.exception(f"Failed to access api {p1}:{p2}")
-
-
-if __name__ == "__main__":
-    main()
