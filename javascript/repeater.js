@@ -8,7 +8,7 @@
  * @return {Function} Function handler
  */
 export function repeater (callback, interval, repetitions, immediate) {
-  repetitions = typeof repeat === 'undefined' ? -1 : repetitions
+  repetitions = typeof repetitions === 'undefined' ? -1 : repetitions
   interval = interval <= 0 ? 1000 : interval
   immediate = typeof immediate === 'undefined' ? false : immediate
   const offset = immediate ? 0 : 1

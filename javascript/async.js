@@ -1,4 +1,3 @@
-
 /* global fetch, csrfToken */
 
 /**
@@ -18,14 +17,14 @@ export async function sendAjax (method = null, url = null, inputData = null) {
   let response
   if (inputData) {
     response = await fetch(url, {
-      method: method,
-      headers: headers,
+      method,
+      headers,
       body: JSON.stringify(inputData)
     })
   } else {
     response = await fetch(url, {
-      method: method,
-      headers: headers
+      method,
+      headers
     })
   }
   if (response.ok) {

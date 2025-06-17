@@ -27,6 +27,8 @@ export function download (destinationUrl, filename) {
 }
 
 // example
+const el = document.getElementById('download-report-button')
+
 el.addEventListener('click', () => {
   const url = '/download/report'
   const filename = 'report_file.csv'
